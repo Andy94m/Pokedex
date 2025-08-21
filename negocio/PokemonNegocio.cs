@@ -63,6 +63,47 @@ namespace negocio
 
         }
 
+        public List<Pokemon> listarConSP()
+        {
+            List<Pokemon> lista = new List<Pokemon>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                //string consulta = "select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id from POKEMONS P, ELEMENTOS E, ELEMENTOS D where E.Id = P.IdTipo and D.Id = P.IdDebilidad and P.Activo = 1"; 
+                //datos.setearConsulta(consulta);
+
+                datos.setearProcedimiento("storedListar");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Pokemon aux = new Pokemon();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Numero = datos.Lector.GetInt32(0);
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    if (!(datos.Lector["UrlImagen"] is DBNull))
+                        aux.UrlImagen = (string)datos.Lector["UrlImagen"];
+
+                    aux.Tipo = new Elemento();
+                    aux.Tipo.id = (int)datos.Lector["IdTipo"];
+                    aux.Tipo.Descripcion = (string)datos.Lector["Tipo"];
+
+                    aux.Debilidad = new Elemento();
+                    aux.Debilidad.id = (int)datos.Lector["IdDebilidad"];
+                    aux.Debilidad.Descripcion = (string)datos.Lector["Debilidad"];
+
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void agregar(Pokemon nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
