@@ -46,7 +46,7 @@ namespace negocio
                     aux.Tipo = new Elemento();
                     aux.Tipo.id = (int)lector["IdTipo"];
                     aux.Tipo.Descripcion = (string)lector["Tipo"];
-                    
+
                     aux.Debilidad = new Elemento();
                     aux.Debilidad.id = (int)lector["IdDebilidad"];
                     aux.Debilidad.Descripcion = (string)lector["Debilidad"];
@@ -104,19 +104,20 @@ namespace negocio
             }
         }
 
-        public void agregar(Pokemon nuevo)
+        public void agregarConSP(Pokemon nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("insert into POKEMONS (Numero, Nombre, Descripcion, Activo, UrlImagen, IdTipo, IdDebilidad) VALUES (@Numero, @Nombre, @Descripcion," + 1 + ", @UrlImagen, @IdTipo, @IdDebilidad)");
+                datos.setearProcedimiento("storedAltaPokemon");
                 datos.setearParametro("@Numero", nuevo.Numero);
                 datos.setearParametro("@Nombre", nuevo.Nombre);
-                datos.setearParametro("@Descripcion", nuevo.Descripcion);
-                datos.setearParametro("@UrlImagen", nuevo.UrlImagen);
+                datos.setearParametro("@Desc", nuevo.Descripcion);
+                datos.setearParametro("@img", nuevo.UrlImagen);
                 datos.setearParametro("@idTipo", nuevo.Tipo.id);
                 datos.setearParametro("@idDebilidad", nuevo.Debilidad.id);
+                //datos.setearParametro("idEvolucion", null);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -125,8 +126,8 @@ namespace negocio
                 throw ex;
             }
             finally
-            { 
-                datos.cerrarConexion(); 
+            {
+                datos.cerrarConexion();
             }
         }
 
@@ -173,7 +174,7 @@ namespace negocio
             }
         }
 
-        public void eliminarLogico(int id) 
+        public void eliminarLogico(int id)
         {
             try
             {
@@ -189,15 +190,15 @@ namespace negocio
             }
         }
 
-        public List<Pokemon> filtrar (string campo, string criterio, string filtro)
+        public List<Pokemon> filtrar(string campo, string criterio, string filtro)
         {
-            List<Pokemon> lista = new List<Pokemon> ();
-            AccesoDatos datos = new AccesoDatos ();
+            List<Pokemon> lista = new List<Pokemon>();
+            AccesoDatos datos = new AccesoDatos();
             try
             {
                 string consulta = "select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id from POKEMONS P, ELEMENTOS E, ELEMENTOS D where E.Id = P.IdTipo and D.Id = P.IdDebilidad and P.Activo = 1 and ";
 
-                if(campo == "Numero")
+                if (campo == "Numero")
                 {
                     switch (criterio)
                     {
@@ -259,7 +260,7 @@ namespace negocio
                     aux.Tipo = new Elemento();
                     aux.Tipo.id = (int)datos.Lector["IdTipo"];
                     aux.Tipo.Descripcion = (string)datos.Lector["Tipo"];
-                    
+
                     aux.Debilidad = new Elemento();
                     aux.Debilidad.id = (int)datos.Lector["IdDebilidad"];
                     aux.Debilidad.Descripcion = (string)datos.Lector["Debilidad"];
