@@ -103,6 +103,7 @@
     <Content Include="FormularioPokemon.aspx" />
     <Content Include="Global.asax" />
     <Content Include="PokemonsLista.aspx" />
+    <Content Include="Registro.aspx" />
     <Content Include="Web.config" />
     <Content Include="DetallePokemon.aspx" />
   </ItemGroup>
@@ -145,6 +146,13 @@
     </Compile>
     <Compile Include="DetallePokemon.aspx.designer.cs">
       <DependentUpon>DetallePokemon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Registro.aspx.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registro.aspx.designer.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
