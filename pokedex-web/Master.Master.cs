@@ -12,7 +12,13 @@ namespace pokedex_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!(Page is Login))
+            {
+                if (!Seguridad.sesionActiva(Session["trainee"]))
+                {
+                    Response.Redirect("Login.aspx", false);
+                }
+            }
         }
     }
 }
