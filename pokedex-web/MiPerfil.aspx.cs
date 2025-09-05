@@ -20,5 +20,32 @@ namespace pokedex_web
             }
 
         }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TraineeNegocio negocio = new TraineeNegocio();
+
+                //Escribir img
+                string ruta = Server.MapPath("./Images/");
+                Trainee user = (Trainee)Session["trainee"];
+                txtImagen.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg");
+
+                //guardar datos perfil
+                user.ImagenPerfil = "perfil-" + user.Id + ".jpg";
+                negocio.actualizar(user);
+
+                //Lee img
+                Image img = (Image)Master.FindControl("imgAvatar");
+                img.ImageUrl = "~/Images/" + user.ImagenPerfil;
+
+
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex.ToString());
+            }
+        }
     }
 }
