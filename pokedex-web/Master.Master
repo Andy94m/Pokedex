@@ -45,6 +45,7 @@
                         {
                     %>
                     <asp:Button Text="Salir" ID="btnSalir" CssClass="btn btn-outline-primary me-2" OnClick="btnSalir_Click" runat="server" />
+                    <asp:Label Text="user" ID="lblUser" CssClass="text-light m-auto me-2" runat="server" />
                     <%} %>
                     <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;"
                         ImageUrl="https://simg.nicepng.com/png/small/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png"
