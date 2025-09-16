@@ -22,8 +22,8 @@ namespace pokedex_web
             Trainee trainee = new Trainee();
             TraineeNegocio negocio = new TraineeNegocio();
             
-            try
-            {
+            //try
+            //{
                 trainee.Email = txtEmail.Text;
                 trainee.Pass = txtPassword.Text;
                 if (negocio.Login(trainee))
@@ -34,15 +34,21 @@ namespace pokedex_web
                 else
                 {
                     Session.Add("error", "user o pass incorrectos");
-                    Response.Redirect("Error.aspx");
+                    Response.Redirect("Error.aspx", false);
                 }
 
             }
-            catch (Exception ex)
-            {
-                Session.Add("error", ex.ToString());
-                Response.Redirect("Error.aspx");
-            }
+            //catch (Exception ex)
+            //{
+            //    Session.Add("error", ex.ToString());
+            //    Response.Redirect("Error.aspx");
+            //}
+
+        private void Page_Error(object sender, EventArgs e)
+        {
+            Exception exc = Server.GetLastError();
+            Session.Add("error", exc.ToString());
+            Server.Transfer("Error.aspx");
         }
     }
 }
