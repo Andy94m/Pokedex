@@ -122,7 +122,7 @@ namespace pokedex_web
                 {
                     PokemonNegocio negocio = new PokemonNegocio();
                     negocio.eliminar(int.Parse(txtId.Text));
-                    Response.Redirect("PokemonsLista.aspx");
+                    Response.Redirect("PokemonsLista.aspx", false);
                 }
             }
             catch (Exception ex)
