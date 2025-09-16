@@ -60,7 +60,6 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                //throw new Exception("Error del loggginnnnn");
                 datos.setearConsulta("Select id, email, pass, admin, imagenPerfil, nombre, apellido, fechaNacimiento from USERS WHERE email = @email AND pass = @pass");
                 datos.setearParametro("@email", trainee.Email);
                 datos.setearParametro("@pass", trainee.Pass);

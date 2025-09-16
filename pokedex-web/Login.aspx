@@ -7,7 +7,7 @@
         <h2>Login</h2>
         <div class="mb-3">
             <label class="form-label">Email</label>
-            <asp:TextBox runat="server" CssClass="form-control" ID="txtEmail" />
+            <asp:TextBox runat="server" CssClass="form-control" REQUIRED ID="txtEmail" />
         </div>
         <div class="mb-3">
             <label class="form-label">Password</label>
